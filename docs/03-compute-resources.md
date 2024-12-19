@@ -84,7 +84,7 @@ for i in 0 1 2; do
   FD_NAME=$(oci iam fault-domain list --availability-domain $AD_NAME | jq -r .data[$((i % NUM_FDS))].name)  
   
   oci compute instance launch --display-name controller-${i} --assign-public-ip true \
-    --subnet-id $SUBNET_ID --shape VM.Standard.E3.Flex --availability-domain $AD_NAME \
+    --subnet-id $SUBNET_ID --shape VM.Standard.E4.Flex --availability-domain $AD_NAME \
     --fault-domain $FD_NAME --image-id $IMAGE_ID --shape-config '{"memoryInGBs": 8.0, "ocpus": 2.0}' \
     --private-ip 10.240.0.1${i} \
     --freeform-tags '{"project": "kubernetes-the-hard-way","role":"controller"}' \
