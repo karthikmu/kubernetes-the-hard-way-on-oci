@@ -26,7 +26,7 @@ A [subnet](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/managingVCNs
 Create the `kubernetes` subnet in the `kubernetes-the-hard-way` VCN, along with a Route Table and Internet Gateway allowing traffic to the internet.
 
 ```
-INTERNET_GATEWAY_ID=$(oci network internet-gateway create --display-name kubernetes-the-hard-way \ 
+INTERNET_GATEWAY_ID=$(oci network internet-gateway create --display-name kubernetes-the-hard-way \
   --vcn-id $VCN_ID --is-enabled true | jq -r .data.id)
 ROUTE_TABLE_ID=$(oci network route-table create --display-name kubernetes-the-hard-way --vcn-id $VCN_ID \
   --route-rules  "[{\"cidrBlock\":\"0.0.0.0/0\",\"networkEntityId\":\"$INTERNET_GATEWAY_ID\"}]" \
